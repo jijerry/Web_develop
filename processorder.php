@@ -2,7 +2,7 @@
 /**
  * Author: jerry
  * Last modified: 2018/5/28
- * THis script is processing users order
+ * 用户提交的订单写入文件中
  */
 
 $tireqty = $_POST['tireqty'];
