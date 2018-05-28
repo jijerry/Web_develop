@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户订购商品清单</title>
+</head>
+<body>
+<form action="processorder.php" method="post">
+    <table border="0">
+        <tr bgcolor="#cccccc">
+            <td width="150">Item</td>
+            <td width="50">Quality</td>
+        </tr>
+        <tr>
+            <td>Tires</td>
+            <td align="center"><input type="text" name="tireqty" size="10" maxlength="3"/></td>     <!--size标示输入框大小，maxlength标示输入字数长度-->
+        </tr>
+        <tr>
+            <td>Oil</td>
+            <td align="center"><input type="text" name="oilqty" size="10" maxlength="3"></td>
+        </tr>
+        <tr>
+            <td>Spark Plugs</td>
+            <td align="center"><input type="text" name="sparkqty" size="10" maxlength="3"></td>
+        </tr>
+        <tr>
+            <td>Shipping Address</td>
+            <td align="center"><input type="text" name="address" size="10" maxlength="3"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="Summit Order"></td>      <!-- colspan 表格单元格横跨两列-->
+        </tr>
+
+    </table>
+
+</form>
+
+</body>
+</html>
