@@ -25,8 +25,6 @@ if (!$fp){
 while (!feof($fp)){     //文件指针指向文件末尾，将返回true
     $order = fgets($fp, 999);
     echo $order. "<br/>";
-
-
 }
 ?>
 </body>
