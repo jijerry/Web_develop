@@ -22,10 +22,13 @@ if (!$fp){
     echo "<p><strong>No order pending, please try again later</strong></p>";
     exit();
 }
+flock($fp, LOCK_SH);    //lock file for reading
 while (!feof($fp)){     //文件指针指向文件末尾，将返回true
     $order = fgets($fp, 999);
     echo $order. "<br/>";
 }
+flock($fp, LOCK_UN);    //release read lock
+fclose($fp);
 ?>
 </body>
 </html>
