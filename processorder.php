@@ -54,7 +54,7 @@ $outputsring = $date. "\t" .$tireqty. " tires \t" .$oilqty. " oil \t" .$sparkqty
 @ $fp = fopen("$DOCUMENT_ROOT/Web_develop/order.txt", 'ab');
 flock($fp, LOCK_EX);    //lock the file for writing
 if (!$fp){
-    echo "<p><strong>your order could not be processed at this time. please try again later</strong></p></body>
+    echo "<p><strong>your order could not be processed at  this time. please try again later</strong></p></body>
 </html>";
     exit();
 }
