@@ -5,6 +5,8 @@
  * 用户提交的订单写入文件中
  */
 
+require_once 'file_exception.php';
+
 $tireqty = $_POST['tireqty'];
 $oilqty = $_POST['oilqty'];
 $sparkqty = $_POST['sparkqty'];
@@ -50,17 +52,43 @@ echo "<p> address to ship to is" .$address. "<p/>";
 
 $outputsring = $date. "\t" .$tireqty. " tires \t" .$oilqty. " oil \t" .$sparkqty. " spark plugs \t" .$totalamount. "\t" .$address. "\n";
 
+
 //open file for appending
-@ $fp = fopen("$DOCUMENT_ROOT/Web_develop/order.txt", 'ab');
-flock($fp, LOCK_EX);    //lock the file for writing
-if (!$fp){
-    echo "<p><strong>your order could not be processed at  this time. please try again later</strong></p></body>
-</html>";
-    exit();
+//@ $fp = fopen("$DOCUMENT_ROOT/Web_develop/order.txt", 'ab');
+//flock($fp, LOCK_EX);    //lock the file for writing
+//if (!$fp){
+//    echo "<p><strong>your order could not be processed at  this time. please try again later</strong></p></body>
+//</html>";
+//    exit();
+//}
+//fwrite($fp, $outputsring, strlen($outputsring));
+//flock($fp, LOCK_UN);    //release write lock
+//fclose($fp);
+
+try{
+    if (!($pf = fopen("$DOCUMENT_ROOT/Web_develop/order.txt", 'ab'))){
+        throw new fileOpenException();
+    }
+    if (!flock($fp, LOCK_EX)){
+        throw new fileLockException();
+    }
+    if (!fwrite($fp, $outputsring, strlen($outputsring))){
+        throw new fileWriteException();
+    }
+    flock($fp, LOCK_UN);
+    fclose($fp);
+    echo "<p>order written.</p>";
 }
-fwrite($fp, $outputsring, strlen($outputsring));
-flock($fp, LOCK_UN);    //release write lock
-fclose($fp);
-echo "<p>order written.</p>";
+catch (fileOpenException $foe){
+    echo "<p><strong>Orders file could not be opened.
+         Please contact our webmaster for help.</strong></p>";
+
+}
+catch (Exception $e){
+    echo "<p><strong>Your order could not be processed at this time.
+         Please try again later.</strong></p>";
+
+}
+
 ?>
 
